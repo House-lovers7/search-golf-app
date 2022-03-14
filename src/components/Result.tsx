@@ -3,9 +3,22 @@ import { Plan } from "./Home";
 
 type Props = {
  plans: Plan[];
+ plansCount: number | undefined;
 };
 
-const Result: React.FC<Props> = ({ plans }) => {
+const Result: React.FC<Props> = ({ plans, plansCount }) => {
+
+  if (plansCount === 0) {
+    return (
+      <div className="wrapper">
+        <div className="ui orange message">
+          <div className="header">
+            ゴルフ場が見つかりませんでした。条件を変更して再度検索してください。
+          </div>
+        </div>
+      </div>
+    );
+ }
   const result = plans.map((plan: Plan) => {
     return (
       <div className="item" key={plan.plan_id}>

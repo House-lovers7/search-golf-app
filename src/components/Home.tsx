@@ -31,6 +31,7 @@ const Home = () => {
     const [duration, setDuration] = React.useState<number>(60);
     // plans　Stateを管理できるStateを初期化する。初期値は空の配列：[]。
    const [plans, setPlans] = React.useState<Plan[]>([]);
+   const [plansCount, setPlansCount] = React.useState<number | undefined>(undefined);
     registerLocale('ja', ja);
 
     const onFormSubmit = async (event: { preventDefault: () => void; }) => {
@@ -41,6 +42,7 @@ const Home = () => {
       });
       // onFormSubmitが実行され、正常にAPIのレスポンスが返ってきたら、plans Stateに更新される。
       setPlans(response.data.plans);
+      setPlansCount(response.data.plansCount);
       console.log(date, budget, departure, duration)
       console.log(response)
     }
@@ -109,7 +111,7 @@ const Home = () => {
                </button>
              </div>
            </form>
-           <Result plans={plans} />
+           <Result plans={plans} plansCount={plansCount}/>
          </div>
        </div>
      );
